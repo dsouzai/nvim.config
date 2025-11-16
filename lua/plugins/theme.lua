@@ -6,6 +6,7 @@ return {
   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
   {
     'folke/tokyonight.nvim',
+    enabled = false,
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
       ---@diagnostic disable-next-line: missing-fields
@@ -19,6 +20,28 @@ return {
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
+    end,
+  },
+
+  {
+    'catppuccin/nvim',
+    -- enabled = false,
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      require('catppuccin').setup {
+        --term_colors = true,
+        flavour = 'mocha',
+        color_overrides = {
+          mocha = {
+            base = '#000000',
+            mantle = '#000000',
+            crust = '#000000',
+          },
+        },
+      }
+
+      vim.cmd.colorscheme 'catppuccin'
     end,
   },
 }

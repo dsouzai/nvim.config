@@ -11,6 +11,7 @@ vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = ''
+vim.opt.mousescroll = 'ver:0,hor:0'
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
