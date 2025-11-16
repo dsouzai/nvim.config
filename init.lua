@@ -37,6 +37,9 @@ vim.g.cmp_toggle_flag = true
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- 24 bit colours
+vim.opt.termguicolors = true
+
 require 'options'
 require 'mappings'
 require 'autocmds'
