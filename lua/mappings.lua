@@ -43,6 +43,10 @@ vim.keymap.set('n', '<leader>O', 'O<Esc>', { desc = 'Insert line below, stay in 
 --map('n', '<C-m>', 'zf%za', {})
 vim.keymap.set('n', '<leader>x', ':bd<CR>', { desc = 'Close current buffer' })
 
+-- treesitter
+vim.keymap.set('n', '<leader>tv', ':NvimTreeToggle<CR>', { desc = 'Toggle treeview' })
+vim.keymap.set('n', '<leader>tf', ':NvimTreeFocus<CR>', { desc = 'Focus on treeview ' })
+
 ------------------------------------------------------------------------------------------
 -- insert mode overrides
 
@@ -61,5 +65,7 @@ vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste over selection, put sel
 -- clipboard mappings; needs xclip
 vim.keymap.set('x', '<leader>cy', '"+y', { desc = 'Yank to clipboard ' })
 vim.keymap.set('n', '<leader>cy', '"+y', { desc = 'Yank to clipboard ' })
+vim.keymap.set('x', '<leader>cd', '"+d', { desc = 'Cut to clipboard ' })
+vim.keymap.set('n', '<leader>cd', '"+d', { desc = 'Cut to clipboard ' })
 vim.keymap.set('x', '<leader>cp', '"+p', { desc = 'Paste from clipboard ' })
 vim.keymap.set('n', '<leader>cp', '"+p', { desc = 'Paste from clipboard ' })

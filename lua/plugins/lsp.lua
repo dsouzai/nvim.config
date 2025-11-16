@@ -28,9 +28,6 @@ return {
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
-
-      -- Needed for clangd
-      'p00f/clangd_extensions.nvim',
     },
     config = function()
       -- Brief aside: **What is LSP?**
@@ -83,21 +80,9 @@ return {
           -- or a suggestion from your LSP for this to activate.
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
 
-          -- Find references for the word under your cursor.
-          map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
           map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-
-          -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
-          --  To jump back, press <C-t>.
-          map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-
-          -- WARN: This is not Goto Definition, this is Goto Declaration.
-          --  For example, in C this would take you to the header.
-          map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -111,6 +96,32 @@ return {
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
           map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
+
+          -- Find references for the word under your cursor.
+          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+
+          -- Information under curstor in hover pane
+          map('gh', vim.lsp.buf.hover, 'SHow information under curstor in hover pane')
+
+          -- Go to definition
+          map('gd', vim.lsp.buf.definition, '[G]o to [D]efinition')
+
+          -- WARN: This is not Goto Definition, this is Goto Declaration.
+          --  For example, in C this would take you to the header.
+          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+          -- Show definitions in telescope pane
+          map('<leader>gd', function()
+            require('telescope.builtin').lsp_definitions { jump_type = 'never' }
+          end, 'Preview definition under cursor')
+
+          -- Show diagnostics in telescope pane
+          map('<leader>gD', function()
+            require('telescope.builtin').diagnostics { bufnr = 0 }
+          end, 'Telescope list diagnostics in current buffer')
+
+          -- Switch between source and header when using clangd
+          map('<leader>cs', ':LspClangdSwitchSourceHeader<CR>', 'Clangd switch source/header')
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -279,35 +290,5 @@ return {
         },
       }
     end,
-  },
-  {
-    'p00f/clangd_extensions.nvim',
-    lazy = true,
-    config = function() end,
-    opts = {
-      inlay_hints = {
-        inline = true,
-      },
-      ast = {
-        --These require codicons (https://github.com/microsoft/vscode-codicons)
-        role_icons = {
-          type = '',
-          declaration = '',
-          expression = '',
-          specifier = '',
-          statement = '',
-          ['template argument'] = '',
-        },
-        kind_icons = {
-          Compound = '',
-          Recovery = '',
-          TranslationUnit = '',
-          PackExpansion = '',
-          TemplateTypeParm = '',
-          TemplateTemplateParm = '',
-          TemplateParamObject = '',
-        },
-      },
-    },
   },
 }
