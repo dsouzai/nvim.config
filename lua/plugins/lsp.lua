@@ -30,6 +30,11 @@ return {
       'saghen/blink.cmp',
     },
     config = function()
+      -- If Diff mode is selected don't load any LSP Configs
+      if vim.opt.diff:get() then
+        return
+      end
+
       -- Brief aside: **What is LSP?**
       --
       -- LSP is an initialism you've probably heard, but might not understand what it is.
