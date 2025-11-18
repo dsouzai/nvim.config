@@ -34,6 +34,9 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.cmp_toggle_flag = true
 
+-- python3 host checks take way too long
+vim.g.loaded_python3_provider = 0
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
