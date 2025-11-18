@@ -73,3 +73,11 @@ vim.keymap.set('x', '<leader>cd', '"+d', { desc = 'Cut to clipboard ' })
 vim.keymap.set('n', '<leader>cd', '"+d', { desc = 'Cut to clipboard ' })
 vim.keymap.set('x', '<leader>cp', '"+p', { desc = 'Paste from clipboard ' })
 vim.keymap.set('n', '<leader>cp', '"+p', { desc = 'Paste from clipboard ' })
+
+--[[
+-- diff mode disable insert mode
+if vim.opt.diff:get() then
+  vim.keymap.set('n', 'i', '<Esc>', { desc = "Can't enter insert mode in diff mode" })
+  vim.keymap.set('n', 'a', '<Esc>', { desc = "Can't enter insert mode in diff mode" })
+end
+]]
