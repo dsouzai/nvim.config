@@ -3,6 +3,14 @@
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+-- 24 bit colours
+vim.opt.termguicolors = true
+
+-- set nomodifiable in diff mode
+if vim.opt.diff:get() then
+  vim.o.modifiable = false
+end
+
 -- Make line numbers default
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
