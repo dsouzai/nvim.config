@@ -42,6 +42,15 @@ vim.keymap.set('n', '<leader>o', 'o<Esc>', { desc = 'Insert line below, stay in 
 vim.keymap.set('n', '<leader>O', 'O<Esc>', { desc = 'Insert line below, stay in normal mode' })
 --map('n', '<C-m>', 'zf%za', {})
 vim.keymap.set('n', '<leader>x', ':bd<CR>', { desc = 'Close current buffer' })
+vim.keymap.set('n', '<leader>ca', function()
+  local bufs = vim.api.nvim_list_bufs()
+  local current_buf = vim.api.nvim_get_current_buf()
+  for _, i in ipairs(bufs) do
+    if i ~= current_buf then
+      vim.api.nvim_buf_delete(i, {})
+    end
+  end
+end, { desc = 'Close all buffers but the curent one' })
 
 -- treesitter
 vim.keymap.set('n', '<leader>tv', ':NvimTreeToggle<CR>', { desc = 'Toggle treeview' })
