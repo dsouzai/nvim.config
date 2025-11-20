@@ -234,7 +234,13 @@ return {
           },
         },
         -- gopls = {},
-        -- pyright = {},
+        pyright = {},
+        ruff = {
+          -- disable ruff as hover provider to avoid conflicts with pyright
+          on_attach = function(client)
+            client.server_capabilities.hoverProvider = false
+          end,
+        },
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
