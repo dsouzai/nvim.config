@@ -80,8 +80,10 @@ vim.keymap.set('x', '<leader>cy', '"+y', { desc = 'Yank to clipboard ' })
 vim.keymap.set('n', '<leader>cy', '"+y', { desc = 'Yank to clipboard ' })
 vim.keymap.set('x', '<leader>cd', '"+d', { desc = 'Cut to clipboard ' })
 vim.keymap.set('n', '<leader>cd', '"+d', { desc = 'Cut to clipboard ' })
-vim.keymap.set('x', '<leader>cp', '"+p', { desc = 'Paste from clipboard ' })
-vim.keymap.set('n', '<leader>cp', '"+p', { desc = 'Paste from clipboard ' })
+vim.keymap.set('x', '<leader>cp', '"+p', { desc = 'Paste from clipboard after cursor' })
+vim.keymap.set('n', '<leader>cp', '"+p', { desc = 'Paste from clipboard after cursor' })
+vim.keymap.set('x', '<leader>cP', '"+P', { desc = 'Paste from clipboard before cursor' })
+vim.keymap.set('n', '<leader>cP', '"+P', { desc = 'Paste from clipboard before cursor' })
 
 --[[
 -- diff mode disable insert mode
