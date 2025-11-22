@@ -45,7 +45,7 @@ return {
         vim.g.cmp_toggle_flag = cmp_toggle_flag
       end
 
-      vim.keymap.set({ 'i', 'n' }, '<leader>tc', toggle_completion, { desc = 'Toggle Completion' })
+      vim.keymap.set('n', '<leader>tc', toggle_completion, { desc = 'Toggle Completion' })
 
       return {
         enabled = function()

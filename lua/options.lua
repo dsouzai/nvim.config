@@ -89,6 +89,4 @@ vim.opt.shiftwidth = 4
 vim.opt.smartindent = false
 vim.opt.expandtab = true
 
-vim.opt.list = true
-
 -- vim.o.winborder = 'single'

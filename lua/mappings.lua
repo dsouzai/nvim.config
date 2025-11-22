@@ -19,6 +19,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 ------------------------------------------------------------------------------------------
 -- normal mode overrides
 
+-- treesitter
+vim.keymap.set('n', '<leader>tv', ':NvimTreeToggle<CR>', { desc = 'Toggle treeview' })
+vim.keymap.set('n', '<leader>tf', ':NvimTreeFocus<CR>', { desc = 'Focus on treeview ' })
+
 -- navigation
 vim.keymap.set('n', '<leader>c/', '/<Bslash>c', { desc = 'Case-insensitive forward search' })
 vim.keymap.set('n', '<leader>c?', '?<Bslash>c', { desc = 'Case-insensitive forward search' })
@@ -50,11 +54,8 @@ vim.keymap.set('n', '<leader>ca', function()
       vim.api.nvim_buf_delete(i, {})
     end
   end
+  print 'Closed all other buffers'
 end, { desc = 'Close all buffers but the curent one' })
-
--- treesitter
-vim.keymap.set('n', '<leader>tv', ':NvimTreeToggle<CR>', { desc = 'Toggle treeview' })
-vim.keymap.set('n', '<leader>tf', ':NvimTreeFocus<CR>', { desc = 'Focus on treeview ' })
 
 ------------------------------------------------------------------------------------------
 -- insert mode overrides
@@ -84,6 +85,12 @@ vim.keymap.set('x', '<leader>cp', '"+p', { desc = 'Paste from clipboard after cu
 vim.keymap.set('n', '<leader>cp', '"+p', { desc = 'Paste from clipboard after cursor' })
 vim.keymap.set('x', '<leader>cP', '"+P', { desc = 'Paste from clipboard before cursor' })
 vim.keymap.set('n', '<leader>cP', '"+P', { desc = 'Paste from clipboard before cursor' })
+
+-- Disable arrow keys (mainly because of the trackpad)
+vim.keymap.set({ 'n', 'i', 'x' }, '<Up>', '<Nop>', { desc = 'Disable arrow keys' })
+vim.keymap.set({ 'n', 'i', 'x' }, '<Down>', '<Nop>', { desc = 'Disable arrow keys' })
+vim.keymap.set({ 'n', 'i', 'x' }, '<Left>', '<Nop>', { desc = 'Disable arrow keys' })
+vim.keymap.set({ 'n', 'i', 'x' }, '<Right>', '<Nop>', { desc = 'Disable arrow keys' })
 
 --[[
 -- diff mode disable insert mode
