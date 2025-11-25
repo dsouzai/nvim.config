@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   callback = function()
     if not vim.o.binary and vim.o.filetype ~= 'diff' then
       local current_view = vim.fn.winsaveview()
-      vim.cmd [[keeppatterns %s/\s\+$//e]]
+      vim.cmd [[keeppatterns %s/\(\(\s\+\)\|\r\)$//e]]
       vim.fn.winrestview(current_view)
     end
   end,
