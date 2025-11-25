@@ -57,6 +57,10 @@ vim.keymap.set('n', '<leader>ca', function()
   print 'Closed all other buffers'
 end, { desc = 'Close all buffers but the curent one' })
 
+if vim.opt.diff:get() then
+  vim.keymap.set('n', '<C-c>', ':qall<CR>', { desc = 'Close all buffers in diff mode' })
+end
+
 ------------------------------------------------------------------------------------------
 -- insert mode overrides
 
