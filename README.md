@@ -31,6 +31,7 @@ Based on [kickstart.nvim](http://github.com/nvim-lua/kickstart.nvim)
 - `python3`, `python3-venv`
 - `npm`
 - `rust` toolchain
+- `racket` and `racket-langserver`
 - A [Nerd Font](https://www.nerdfonts.com/)
 
 ### Install

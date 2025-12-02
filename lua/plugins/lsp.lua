@@ -233,7 +233,6 @@ return {
             '--header-insertion=never',
           },
         },
-        -- gopls = {},
         pyright = {},
         ruff = {
           -- disable ruff as hover provider to avoid conflicts with pyright
@@ -242,6 +241,8 @@ return {
           end,
         },
         rust_analyzer = {},
+        racket_langserver = {},
+
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -285,7 +286,20 @@ return {
         'stylua', -- Used to format Lua code
         'rustfmt', -- Used to format rust code
       })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+      -- Only pass servers to mason-tool-installer that mason knows about in
+      -- its registry; the remainder must be installed manually
+      local ensure_installed_mason = {}
+      local packages = require('mason-registry').get_all_package_names()
+      for _, tool in pairs(ensure_installed) do
+        for _, package in pairs(packages) do
+          if tool == package then
+            vim.list_extend(ensure_installed_mason, { package })
+            break
+          end
+        end
+      end
+      require('mason-tool-installer').setup { ensure_installed = ensure_installed_mason }
 
       -- mason-lspconfig does not override server configurations;
       -- do it explicitly here via vim.lsp.config
