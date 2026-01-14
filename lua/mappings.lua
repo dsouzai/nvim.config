@@ -36,10 +36,6 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = '<C-u> but centering the screen
 vim.keymap.set('n', 'n', 'nzzzv', { desc = 'n but centering the screen' })
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'N but centering the screen' })
 
--- diff navigation
-vim.keymap.set('n', ']c', ']czz', { desc = 'Center screen after next change' })
-vim.keymap.set('n', '[c', '[czz', { desc = 'Center screen after prev change' })
-
 -- misc
 vim.keymap.set('n', ';', ':', { desc = 'CMD enter command mode' })
 vim.keymap.set('n', '<leader>o', 'o<Esc>', { desc = 'Insert line below, stay in normal mode' })
@@ -59,6 +55,10 @@ end, { desc = 'Close all buffers but the curent one' })
 
 if vim.opt.diff:get() then
   vim.keymap.set('n', '<C-c>', ':qall<CR>', { desc = 'Close all buffers in diff mode' })
+
+  -- diff navigation
+  vim.keymap.set('n', ']c', ']czt', { desc = 'Center screen after next change' })
+  vim.keymap.set('n', '[c', '[czt', { desc = 'Center screen after prev change' })
 end
 
 ------------------------------------------------------------------------------------------
