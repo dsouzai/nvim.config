@@ -6,6 +6,7 @@ vim.g.maplocalleader = ' '
 vim.g.cmp_toggle_flag = true
 vim.g.no_racket_maps = true
 vim.g.center_mode = false
+vim.g.lock_line = false
 
 -- python3 host checks take way too long
 vim.g.loaded_python3_provider = 0

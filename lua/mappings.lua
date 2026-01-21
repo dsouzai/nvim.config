@@ -19,15 +19,31 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 ------------------------------------------------------------------------------------------
 -- normal mode overrides
 
--- function to toggle "center mode"
+-- function to toggle "line locked mode"
+local function toggle_line_lock_mode()
+  vim.g.lock_line = not vim.g.lock_line
+  if vim.g.lock_line then
+    vim.keymap.set('n', 'j', 'j<C-e>', { desc = 'j in lock line mode' })
+    vim.keymap.set('n', 'k', 'k<C-y>', { desc = 'k in lock line mode' })
+  else
+    vim.keymap.del('n', 'j', { desc = 'j in lock line mode' })
+    vim.keymap.del('n', 'k', { desc = 'k in lock line mode' })
+  end
+end
+
+-- function to toggle "center mode" which is a special case of "line locked mode"
 local function toggle_center_mode()
   vim.g.center_mode = not vim.g.center_mode
-  local center = ''
+
+  vim.api.nvim_feedkeys('zz', 'n', true)
+
   if vim.g.center_mode then
-    center = 'zz'
+    if not vim.g.lock_line then
+      toggle_line_lock_mode()
+    end
+  else
+    toggle_line_lock_mode()
   end
-  vim.keymap.set('n', 'j', 'j' .. center, { desc = 'jzz if in center_mode, j otherwise' })
-  vim.keymap.set('n', 'k', 'k' .. center, { desc = 'kzz if in center_mode, k otherwise' })
 end
 
 -- treesitter
@@ -75,6 +91,9 @@ if vim.opt.diff:get() then
   -- enter "center mode"
   -- toggle_center_mode()
 end
+
+-- "lock line mode"
+vim.keymap.set('n', '<leader>ll', toggle_line_lock_mode, { desc = 'Toggle lock line mode' })
 
 -- "center mode"
 vim.keymap.set('n', '<leader>cm', toggle_center_mode, { desc = 'Toggle center mode' })
