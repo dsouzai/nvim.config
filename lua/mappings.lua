@@ -19,6 +19,17 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 ------------------------------------------------------------------------------------------
 -- normal mode overrides
 
+-- function to toggle "center mode"
+local function toggle_center_mode()
+  vim.g.center_mode = not vim.g.center_mode
+  local center = ''
+  if vim.g.center_mode then
+    center = 'zz'
+  end
+  vim.keymap.set('n', 'j', 'j' .. center, { desc = 'jzz if in center_mode, j otherwise' })
+  vim.keymap.set('n', 'k', 'k' .. center, { desc = 'kzz if in center_mode, k otherwise' })
+end
+
 -- treesitter
 vim.keymap.set('n', '<leader>tv', ':NvimTreeToggle<CR>', { desc = 'Toggle treeview' })
 vim.keymap.set('n', '<leader>tf', ':NvimTreeFocus<CR>', { desc = 'Focus on treeview ' })
@@ -53,13 +64,20 @@ vim.keymap.set('n', '<leader>ca', function()
   print 'Closed all other buffers'
 end, { desc = 'Close all buffers but the curent one' })
 
+-- diff mode
 if vim.opt.diff:get() then
   vim.keymap.set('n', '<C-c>', ':qall<CR>', { desc = 'Close all buffers in diff mode' })
 
   -- diff navigation
-  vim.keymap.set('n', ']c', ']czt', { desc = 'Center screen after next change' })
-  vim.keymap.set('n', '[c', '[czt', { desc = 'Center screen after prev change' })
+  vim.keymap.set('n', ']c', ']czt', { desc = 'Next change followed by zt' })
+  vim.keymap.set('n', '[c', '[czt', { desc = 'Prev change followed by zt' })
+
+  -- enter "center mode"
+  -- toggle_center_mode()
 end
+
+-- "center mode"
+vim.keymap.set('n', '<leader>cm', toggle_center_mode, { desc = 'Toggle center mode' })
 
 ------------------------------------------------------------------------------------------
 -- insert mode overrides
@@ -95,11 +113,3 @@ vim.keymap.set({ 'n', 'i', 'x' }, '<Up>', '<Nop>', { desc = 'Disable arrow keys'
 vim.keymap.set({ 'n', 'i', 'x' }, '<Down>', '<Nop>', { desc = 'Disable arrow keys' })
 vim.keymap.set({ 'n', 'i', 'x' }, '<Left>', '<Nop>', { desc = 'Disable arrow keys' })
 vim.keymap.set({ 'n', 'i', 'x' }, '<Right>', '<Nop>', { desc = 'Disable arrow keys' })
-
---[[
--- diff mode disable insert mode
-if vim.opt.diff:get() then
-  vim.keymap.set('n', 'i', '<Esc>', { desc = "Can't enter insert mode in diff mode" })
-  vim.keymap.set('n', 'a', '<Esc>', { desc = "Can't enter insert mode in diff mode" })
-end
-]]
