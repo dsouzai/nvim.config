@@ -39,6 +39,14 @@ return {
             crust = '#000000',
           },
         },
+        highlight_overrides = {
+          mocha = function(color)
+            return {
+              WinSeparator = { fg = '#45475a' },
+              VertSplit = { fg = '#45475a' },
+            }
+          end,
+        },
       }
 
       vim.cmd.colorscheme 'catppuccin'

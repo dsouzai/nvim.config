@@ -89,4 +89,10 @@ vim.opt.shiftwidth = 4
 vim.opt.smartindent = false
 vim.opt.expandtab = true
 
+-- vim.opt.laststatus = 3
+vim.opt.fillchars = {
+  -- stl = '─',
+  stlnc = '─',
+}
+
 -- vim.o.winborder = 'single'
