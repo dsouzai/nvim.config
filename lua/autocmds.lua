@@ -13,9 +13,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 --[[
-Deletes all trailing whitespaces in a file if it's not binary nor a diff.
-]]
---
+-- Deletes all trailing whitespaces in a file if it's not binary nor a diff.
+--]]
 vim.api.nvim_create_autocmd('BufWritePre', {
   desc = 'Trim trailing whitespaces',
   callback = function()
@@ -28,9 +27,8 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 --[[
-Changes tab values based for OpenJ9/OMR Compiler components
-]]
---
+-- Changes tab values based for OpenJ9/OMR Compiler components
+--]]
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   desc = 'Directory specific nvim options',
   callback = function()
@@ -56,3 +54,16 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     end
   end,
 })
+
+--[[
+-- In diff mode, move cursor to the window on the right side.
+--]]
+if vim.opt.diff:get() then
+  vim.api.nvim_create_autocmd('VimEnter', {
+    callback = function()
+      local key = vim.api.nvim_replace_termcodes('<C-w>w', true, false, true)
+      vim.api.nvim_feedkeys(key, 'n', false)
+    end,
+    once = true,
+  })
+end
