@@ -17,6 +17,14 @@ return {
         theme = theme,
       },
       sections = {
+        lualine_b = {
+          {
+            'branch',
+            icon = '',
+          },
+          'diff',
+          'diagnostics',
+        },
         lualine_c = {
           {
             'filename',
