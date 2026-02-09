@@ -8,9 +8,11 @@ return {
         local gs = require 'gitsigns'
         vim.keymap.set('n', ']c', function()
           gs.nav_hunk 'next'
+          vim.api.nvim_feedkeys('zz', 'xn', false)
         end, { desc = 'Next hunk' })
         vim.keymap.set('n', '[c', function()
           gs.nav_hunk 'prev'
+          vim.api.nvim_feedkeys('zz', 'xn', false)
         end, { desc = 'Prev hunk' })
       end
     end,
