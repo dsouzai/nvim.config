@@ -231,6 +231,7 @@ return {
           cmd = {
             'clangd',
             '--header-insertion=never',
+            '--function-arg-placeholders=0',
           },
         },
         pyright = {},
