@@ -27,28 +27,19 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 
 --[[
--- Changes tab values based for OpenJ9/OMR Compiler components
+-- Changes tab values based on OpenJ9/OMR Non-Compiler components
 --]]
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  desc = 'Directory specific nvim options',
+  desc = 'Tab value based on OpenJ9/OMR Non-Compiler .c*/.h* files',
   callback = function()
     local buf_name = vim.api.nvim_buf_get_name(0)
     if string.match(buf_name, '.+%.cp?p?$') or string.match(buf_name, '.+%.hp?p?$') then
-      if string.match(buf_name, '.+/omr/compiler/.+') then
-        vim.opt.shiftwidth = 4
-        vim.opt.tabstop = 4
-        vim.opt.expandtab = true
-      elseif string.match(buf_name, '.+/openj9/runtime/compiler/.+') then
-        vim.opt.shiftwidth = 3
-        vim.opt.tabstop = 3
-        vim.opt.expandtab = true
-      elseif string.match(buf_name, '.+/omr/.+') or string.match(buf_name, '.+/openj9/.+') then
-        vim.opt.shiftwidth = 4
-        vim.opt.tabstop = 4
+      local omr_not_compiler = string.match(buf_name, '.+/omr/.+') and not string.match(buf_name, '.+/omr/compiler/.+')
+      local j9_not_compiler = string.match(buf_name, '.+/openj9/.+') and not string.match(buf_name, '.+/openj9/runtime/compiler/.+')
+
+      if omr_not_compiler or j9_not_compiler then
         vim.opt.expandtab = false
       else
-        vim.opt.shiftwidth = 4
-        vim.opt.tabstop = 4
         vim.opt.expandtab = true
       end
     end
