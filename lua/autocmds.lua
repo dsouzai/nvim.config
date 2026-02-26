@@ -34,13 +34,9 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   callback = function()
     local buf_name = vim.api.nvim_buf_get_name(0)
     if string.match(buf_name, '.+%.cp?p?$') or string.match(buf_name, '.+%.hp?p?$') then
-      if string.match(buf_name, '.+/omr/compiler/.+') then
+      if string.match(buf_name, '.+/omr/compiler/.+') or string.match(buf_name, '.+/openj9/runtime/compiler/.+') then
         vim.opt.shiftwidth = 4
         vim.opt.tabstop = 4
-        vim.opt.expandtab = true
-      elseif string.match(buf_name, '.+/openj9/runtime/compiler/.+') then
-        vim.opt.shiftwidth = 3
-        vim.opt.tabstop = 3
         vim.opt.expandtab = true
       elseif string.match(buf_name, '.+/omr/.+') or string.match(buf_name, '.+/openj9/.+') then
         vim.opt.shiftwidth = 4
